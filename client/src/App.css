@@ -1,0 +1,189 @@
+.App {
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  background-color: #e6e1c5;
+}
+
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #395c6b;
+}
+
+ul.topnav li {
+  float: left;
+}
+
+ul.topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 18px 30px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {
+  background-color: #bcd3f2;
+  color: black;
+}
+
+ul.topnav li a.active {
+  background-color: #80a4ed;
+}
+
+ul.topnav li.right {
+  float: right;
+}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right,
+  ul.topnav li {
+    float: none;
+  }
+  .right {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  ul.topnav li:first-child {
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  ul.topnav li.right,
+  ul.topnav li {
+    font-size: .8rem;
+  }
+  ul.topnav li a {
+  padding: 18px 20px;
+}
+}
+
+.comp-Container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-Container {
+  display: inline-block;
+  width: 260px;
+  text-align: left;
+  padding: 20px;
+  border: solid 1px black;
+  border-radius: 5px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 20px;
+  background-color: #bcd3f2;
+}
+label {
+  font-weight: 600;
+}
+span {
+  padding-right: 10px;
+}
+button {
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+  padding: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+button:hover {
+  background-color: #395c6b;
+  color: white;
+}
+.logOrSign {
+  background-color: #80a4ed;
+}
+.loginInput {
+  padding: 5px;
+  margin: 5px 0px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid black;
+  background-color: #bcd3f2;
+}
+.submit {
+    margin: 30px 0px 20px 0px;
+    width: 100%;
+}
+
+.forgot {
+  margin-top: 20px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  font-size: 0.7rem;
+  background-color: #395c6b;
+  color: white;
+  text-align: center;
+}
+
+.picksForm {
+  width: 280px;
+  margin: auto;
+}
+
+#games {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 10px;
+  padding: 5px 5px 10px 5px;
+  text-align: left;
+}
+
+#games:hover {
+  border: 1px solid #395c6b;
+  box-shadow: 10px 10px 5px #395c6b;
+  padding: 5px 5px 10px 5px;
+}
+
+.pickInput {
+  width: 30px;
+}
+
+.date {
+  margin-top: 5px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.home {
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.away {
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.pickSubmit {
+  margin-top: 20px;
+  padding: 5px 0px;
+  width: 100%;
+}
+
+@media screen and (max-height: 500px) {
+  .footer {
+    display: none;
+  }
+}
