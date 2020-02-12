@@ -21,10 +21,12 @@ connection.once('open', () => {
 const userRouter = require('./routes/user');
 const picksRouter = require('./routes/picks');
 const authRouter = require('./routes/auth');
+const teamsRouter = require('./routes/teams');
 
 app.use('/user', userRouter);
 app.use('/picks', picksRouter);
 app.use('/auth', authRouter);
+app.use('/teams', teamsRouter)
 
 // app.use('/standings', (req, res, next) => {
 // 	res.send('<h1>Standings Page</h1>');

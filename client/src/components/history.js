@@ -6,11 +6,19 @@ const History = () => {
 
   	const userInfo = useContext(AuthContext);
 
+  	const [games, updateGames] = useState([])
+  	const [teams, updateTeams] = useState([])
+  	const [selectedTeam, changeSelection] = useState(userInfo.state.teamName)
+
 	useEffect(() => {
-		// Add User ID param
-		axios.get('/picks/picks/', {
+		getData()		
+	}, [selectedTeam])
+
+	const getData = async () => {
+		await axios.get('/picks/getHistory/', {
 			params: {
-				teamName: userInfo.state.teamName
+				teamName: selectedTeam,
+				status: 'FT'
 			}
 		})
 			.then((result) => {
@@ -20,13 +28,64 @@ const History = () => {
 			.catch((error) => {
 				console.log(error);
 			})
-	}, [])
+		axios.get('teams/getTeams')
+			.then((result) => {
+				console.log(result.data);
+				updateTeams(result.data)
+			})
+			.catch((error) => {
+				console.log(error);
+			})			
+	}
 
-	const [games, updateGames] = useState()
+	const handleTeamChange = (e) => {
+		changeSelection(e.target.value)
+	}
+
+	const mapGames = games.map(match => {
+      let day = match.date.slice(8, 10);
+      let month = match.date.slice(5, 7);
+      let year = match.date.slice(0, 4);
+      const newDate = month + "/" + day + "/" + year;
+		return (
+			<tr key={match._id}>
+				<td>{newDate}</td>
+				<td>{match.home} vs {match.away}</td>
+				<td>{match.homeScore} : {match.awayScore}</td>
+				<td>{match.realHomeScore} : {match.realAwayScore}</td>
+				<td>{match.points}</td>
+			</tr>
+		)}
+	)
+
+	const createTeamList = teams.map(team => {
+    	return (
+    		<option key={team._id}>{team.teamname}</option>
+    	)
+    })
+
 
 		return (
 			<div>
 				<h1>History</h1>
+				<div className="teamSelect">
+					<select onChange={handleTeamChange}>
+						<option>Select a Team</option>
+						{createTeamList}
+					</select>
+				</div>
+				<table>
+					<tbody>
+					<tr>
+						<th>Date</th>
+						<th>Fixture</th>
+						<th>Prediction</th>
+						<th>Score</th>
+						<th>Points</th>
+					</tr>
+					{mapGames}
+					</tbody>
+				</table>
 			</div>
 		)
 	}

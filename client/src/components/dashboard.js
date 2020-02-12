@@ -16,7 +16,7 @@ function Dashboard() {
 		compare()
 	}, [])
 	const compare = async () => {
-		let res = await axios.get('/picks/getUserPicks/', {
+		let res = await axios.get('/picks/getPicks/', {
 			params: {
 				teamName: userInfo.state.teamName
 			}
@@ -60,7 +60,7 @@ function Dashboard() {
 	          	const points = getPoints
 	          	const status = "FT"
 	          	const {goalsHomeTeam, goalsAwayTeam} = match
-	          	const id = match._id
+	          	const id = userPicks[userIndex]._id
 	          	console.log(points, status, goalsHomeTeam, goalsAwayTeam, id)
 				axios.post('picks/update/results', {id, points, status, goalsHomeTeam, goalsAwayTeam })
 					.then((result) => {
@@ -74,6 +74,7 @@ function Dashboard() {
       	} else {
         	let userIndex =  userPicks.map(item => {return item.gameID}).indexOf(match.fixture_id);
         	if (userIndex < 0) {
+        		console.log(userPicks)
 	        	const home = match.homeTeam.team_name
 	        	const homeScore = null
 	        	const away = match.awayTeam.team_name

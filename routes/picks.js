@@ -3,8 +3,14 @@ let Picks = require('../models/picks_model');
 const auth = require('../middleware/auth');
 let objectID = require('mongodb').ObjectID;
 
-router.get('/getUserPicks/:teamName?', (req,res) => {
+router.get('/getPicks/:teamName?', (req,res) => {
 	Picks.find({teamName: req.query.teamName})
+		.then(picks => res.json(picks))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.get('/getUserPicks/:teamName?/:status?', (req,res) => {
+	Picks.find({teamName: req.query.teamName, status: req.query.status})
 		.then(picks => res.json(picks))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
@@ -15,11 +21,11 @@ router.get('/getTable/:status?', (req,res) => {
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-// router.get('/picks/:teamName/:status', (req,res) => {
-// 	Picks.find({teamName: req.params.teamName, status: req.params.status})
-// 		.then(picks => res.json(picks))
-// 		.catch(err => res.status(400).json('Error: ' + err));
-// });
+router.get('/getHistory/:teamName?/:status?', (req,res) => {
+	Picks.find({teamName: req.query.teamName, status: req.query.status})
+		.then(picks => res.json(picks))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
 
 router.get('/picks', (req,res) => {
 	Picks.find()
@@ -64,7 +70,6 @@ router.post('/update/date', (req, res) => {
 
 router.post('/add/', (req, res) => {
 	const { home, homeScore, away, awayScore, gameID, result, points, teamName, date, status, realHomeScore, realAwayScore, homeLogo, awayLogo} = req.body;
-	console.log(req.body)
 	const newPicks = new Picks({
 		home,
 		homeScore,

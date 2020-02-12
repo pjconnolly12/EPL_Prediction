@@ -6,15 +6,19 @@ import { AuthContext } from '../App'
 
 function Picks(props) {
 
-  useLayoutEffect(async () =>  {
-    const result = await axios.get('/picks/getUserPicks/', {
+  useLayoutEffect(() =>  {
+    result()
+  }, [])
+
+  const result = async () => {
+    let res = await axios.get('/picks/getUserPicks/', {
       params: {
-        teamName: userInfo.state.teamName
-        // status: "NS"
+        teamName: userInfo.state.teamName,
+        status: "NS"
         }
       })
-    updateResults(result.data)
-  }, [])
+    updateResults(res.data)
+  }
 
   const userInfo = useContext(AuthContext);
 

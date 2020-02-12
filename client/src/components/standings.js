@@ -41,11 +41,11 @@ const Standings = () => {
 
 	const [table, updateTable] = useState([])
 
-	const mapTable = table.map(el => {
+	const mapTable = table.map((el, index) => {
 		return (
-			<tr>
-				<td>el.team</td>
-				<td>el.points</td>
+			<tr key={index}>
+				<td>{el.team}</td>
+				<td>{el.points}</td>
 			</tr>
 		)
 	})

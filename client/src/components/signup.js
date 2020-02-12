@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button, FormGroup, Form, Label, Input } from "reactstrap";
 import axios from 'axios';
+import Home from './home';
 
-const Signup = () => {
+const Signup = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [teamName, setTeamName] = useState("");
@@ -11,15 +12,24 @@ const Signup = () => {
     return email.length > 0 && password.length > 0 && teamName.length > 0;
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    axios.post('/user/add', {email, password, teamName})
+    await axios.post('/user/add', {email, password, teamName})
       .then((result) => {
-
+        const teamname = teamName
+        axios.post('/teams/add', {teamname})
+        .then((result) => {
+          console.log(result.data)
+        })
+        .catch((error) => {
+          console.log(error.response)
+        })
+        props.setLogorSign(true)
+        props.justSignedUp(true)
         console.log(result.data)
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error.response)
       })
   }
 

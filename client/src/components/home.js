@@ -6,6 +6,7 @@ import { AuthContext } from "../App"
 const Home = () => {
 
 	const [logOrSign, setLogorSign] = useState(true);
+  const [signedUp, justSignedUp] = useState(false);
 
 	const handleButton = () => {
 		logOrSign ? setLogorSign(false) : setLogorSign(true);
@@ -14,17 +15,24 @@ const Home = () => {
 	return (
     <div className="comp-Container">
       <h1>Welcome to EPL Predictions</h1>
-      {logOrSign ? <Login /> : <Signup />}
-      <div>
+      {logOrSign ? <Login /> : <Signup setLogorSign={setLogorSign} justSignedUp={justSignedUp}  />}
+      {signedUp ?
+        <div> 
         <span>
-          {logOrSign
-            ? `Don't have an account yet?`
-            : `Already have an account?`}
+        Thanks for signing up! Please sign in to begin!
+        </span>
+        </div>
+        :
+        <div>
+        <span>
+            {logOrSign ? `Don't have an account yet?`
+              : `Already have an account?`}
         </span>
         <button className="logOrSign" onClick={handleButton}>
           {logOrSign ? `Signup` : `Login`}
         </button>
-      </div>
+        </div>
+      }
     </div>
 	)
 }
