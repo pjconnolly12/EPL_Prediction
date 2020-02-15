@@ -5,10 +5,18 @@ import { AuthContext } from '../App'
 const Navigation = () => {
   const [isActive, setActive] = useState("home");
   const userInfo = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
 
   const makeActive = e => {
     setActive(e.target.name);
   };
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: "LOGOUT"
+    })
+  }
 
   return (
     <ul className="topnav">
@@ -51,6 +59,9 @@ const Navigation = () => {
         >
           History
         </Link>
+      </li>
+      <li className="logout">
+        <button onClick={handleLogout}>Logout</button>
       </li>
       <li className="right">
         <a href="#">Welcome, {userInfo.state.teamName}</a>

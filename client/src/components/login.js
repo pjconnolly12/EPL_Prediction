@@ -2,8 +2,9 @@ import React, { useState, useContext } from "react";
 import { Button, FormGroup, Form, Label, Input } from "reactstrap";
 import { AuthContext } from '../App'
 import axios from 'axios'
+import Home from './home'
 
-const Login = () => {
+const Login = (props) => {
   const { dispatch } = useContext(AuthContext);
   const initialState = {
     email: "",
@@ -41,10 +42,14 @@ const Login = () => {
         setData({
           ...data,
           isSubmitting: false,
-          errorMessage: error.message || error.statusText
+          errorMessage: error.response.data.msg || error.statusText
         });
       });
   };
+
+  const handleForgot = () => {
+    props.updateForgot(true)
+  }
 
   return (
     <div className="modal-Container">
@@ -62,9 +67,12 @@ const Login = () => {
                 "Login"
               )}</Button>
       </Form>
+      <div className="errorMsg">
+        <p>{data.errorMessage}</p>
+      </div>
       <div className="forgot">
         <span>Forget your password?</span>
-        <button>Click Here!</button>
+        <button onClick={handleForgot}>Click Here!</button>
       </div>
     </div>
   );

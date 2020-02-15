@@ -40,6 +40,12 @@ ul.topnav li.right {
   float: right;
 }
 
+ul.topnav li.logout {
+  margin-top: 10px;
+  margin-right: 10px;
+  float: right;
+}
+
 @media screen and (max-width: 600px) {
   ul.topnav li.right,
   ul.topnav li {
@@ -50,12 +56,19 @@ ul.topnav li.right {
     top: 0;
     width: 100%;
   }
+  .logout {
+    position: absolute;
+    margin-right: 10px;
+    top: 0;
+    right: 0;
+    z-index: 1;
+  }
   ul.topnav li:first-child {
     margin-top: 50px;
   }
 }
 
-@media screen and (max-width: 710px) {
+@media screen and (max-width: 750px) {
   ul.topnav li.right,
   ul.topnav li {
     font-size: .8rem;
@@ -114,8 +127,36 @@ button:hover {
     width: 100%;
 }
 
+.errorMsg {
+  text-align: center;
+  color: red;
+  font-size: .8rem;
+}
+
 .forgot {
   margin-top: 20px;
+}
+
+/*Forgot Password Modal*/
+.modalHide {
+  display: none;
+}
+.modal-Forgot {
+  z-index: 1;
+  position: absolute;
+  width: 400px;
+  left: 35%;
+  top: 30%;
+  background-color: #395c6b;
+}
+.closeForgot {
+  float: right;
+}
+.msgHide {
+  display: none;
+}
+.success {
+  text-align: center;
 }
 
 .footer {

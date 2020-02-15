@@ -22,27 +22,17 @@ const userRouter = require('./routes/user');
 const picksRouter = require('./routes/picks');
 const authRouter = require('./routes/auth');
 const teamsRouter = require('./routes/teams');
+const forgotRouter = require('./routes/forgotpassword');
+const resetRouter = require('./routes/resetpassword');
+const updatepasswordRouter = require('./routes/updatepasswordviaemail');
 
 app.use('/user', userRouter);
 app.use('/picks', picksRouter);
 app.use('/auth', authRouter);
-app.use('/teams', teamsRouter)
-
-// app.use('/standings', (req, res, next) => {
-// 	res.send('<h1>Standings Page</h1>');
-// });
-
-// app.use('/picks', (req, res, next) => {
-// 	res.send('<h1>Picks Page</h1>');
-// });
-
-// app.use('/fixtures', (req, res, next) => {
-// 	res.send('<h1>Fixtures Page</h1>');
-// });
-
-// app.use('/', (req, res, next) => {
-// 	res.send('<h1>Home Page</h1>');
-// });
+app.use('/teams', teamsRouter);
+app.use('/forgotpassword', forgotRouter);
+app.use('/resetpassword', resetRouter);
+app.use('/updatepassword', updatepasswordRouter)
 
 app.listen(port, () => {
 	console.log(`Server is running on port: ${port}`);

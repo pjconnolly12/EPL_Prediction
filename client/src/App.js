@@ -15,6 +15,7 @@ const initialState = {
   user: null,
   token: null,
   teamName: null,
+  reset: false,
   matches:[
   	{
 	  	fixture_id: 239076,
