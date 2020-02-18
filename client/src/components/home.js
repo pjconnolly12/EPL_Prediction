@@ -26,7 +26,6 @@ const Home = () => {
   	return (
         <div className="comp-Container">
           <h1>Welcome to EPL Predictions</h1>
-          <ForgotPassword updateForgot={updateForgot} forgot={forgot} />
           {logOrSign ? <Login updateForgot={updateForgot} /> : <Signup setLogorSign={setLogorSign} justSignedUp={justSignedUp}  />}
           {signedUp ?
             <div> 

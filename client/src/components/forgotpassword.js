@@ -45,9 +45,9 @@ const ForgotPassword = (props) => {
                 successMessage: "Recovery email sent!"
               })
             props.updateForgot(false)
-            dispatch({
-              type: "RESET"
-            })
+            // dispatch({
+            //   type: "RESET"
+            // })
             }
           }
         )

@@ -19,7 +19,8 @@ const Navigation = () => {
   }
 
   return (
-    <ul className="topnav">
+    <div className="nav">
+    <ul className="nav-list-left">
       <li>
         <Link
 	        to='./'
@@ -60,13 +61,16 @@ const Navigation = () => {
           History
         </Link>
       </li>
-      <li className="logout">
-        <button onClick={handleLogout}>Logout</button>
-      </li>
+      </ul>
+      <ul className="nav-list-right">
       <li className="right">
         <a href="#">Welcome, {userInfo.state.teamName}</a>
       </li>
+      <li className="logout">
+        <button onClick={handleLogout}>Logout</button>
+      </li>
     </ul>
+    </div>
   );
 };
 export default Navigation;

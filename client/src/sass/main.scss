@@ -1,0 +1,39 @@
+@import "./config/variables";
+@import "./config/media";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$imgKey: random(5);
+$list: amex, anfield, bramall, carrow, emirates;
+$nth: nth($list, $imgKey);
+
+.App {
+	height: 100vh;
+	overflow: hidden;
+	background-image: 
+			linear-gradient(
+    			to right,
+    			rgba($primary-color, 0.9),
+    			rgba($primary-color, 0.7),
+  			), url("../images/#{$nth}.JPG");
+	background-size: cover;
+}
+
+@import "./home/home.scss";
+@import "./dashboard/nav.scss";
+
+.container {
+	text-align: center;
+	color: $secondary-color;
+
+	& .welcome {
+		height: 70vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}

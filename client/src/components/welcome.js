@@ -8,7 +8,7 @@ const Welcome = () => {
   const userInfo = useContext(AuthContext);
 
 	return (
-    <div className="comp-Container">
+    <div className="welcome">
       <h1>Welcome to EPL Predictions</h1>
       <div>
       	<h2>Welcome {userInfo.state.teamName}</h2>

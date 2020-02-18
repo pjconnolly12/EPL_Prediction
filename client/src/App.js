@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import "./sass/main.scss";
 import Dashboard from './components/dashboard';
 import Home from './components/home';
 
@@ -11,7 +11,7 @@ export const AuthContext = React.createContext();
 // })
 
 const initialState = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   user: null,
   token: null,
   teamName: null,
