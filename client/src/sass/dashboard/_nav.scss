@@ -3,8 +3,12 @@
 @import "./config/mixins";
 
 .nav {
-  padding: 5px;
+  padding-top: 15px;
   display: flex;
+
+  & .hide-welcome {
+  display: none;
+  }
 
   & .nav-list-left {
     list-style: none;
@@ -23,7 +27,7 @@
       };
     }
   & .active {
-        border-bottom: 1px solid $orange-accent;
+        color: $orange-accent;
       };
   }
 
@@ -32,6 +36,8 @@
     display: flex;
     justify-content: flex-end;
     width: 40%;
+    padding-right: 20px;
+    padding-top: 2px;
 
     & li a {
       font-weight: 900;
@@ -41,7 +47,80 @@
     }
 
     & button {
-      padding: 5px;
+      padding: 6px;
+    }
+  }
+
+  & .menu-btn {
+    display: none;
+  }
+
+  & .small-nav-list {
+    display: none;
+  }
+}
+
+@include phone {
+  .nav {
+    justify-content: flex-end;
+
+    & .nav-list-right {
+      width: 80%;
+      font-size: .8rem;
+    }
+
+    & .menu-btn {
+      display: block;
+      position: absolute;
+      top: .5rem;
+      left: 1rem;
+      z-index: 2;
+
+      & .btn {
+        font-size: 1.7rem;
+        cursor: pointer;
+      }
+    }
+
+    & .nav-list-left {
+    display: none;
+    }
+
+    & .small-nav-list {
+      height: 100vh;
+      position: absolute;
+      z-index: 1;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      background: 
+      linear-gradient(
+        to right,
+        rgba($primary-color, 0.9),
+        rgba($primary-color, 0.9),
+      );
+
+      & .small-menu-list {
+        list-style-type: none;
+        color: $secondary-color;
+        font-weight: 900;
+      
+      & li {
+        padding: 20px;
+        font-size: 1.3rem;
+
+        & a {
+          text-decoration: none;
+          color: $secondary-color;
+
+          &:Hover {
+            border-bottom: 1px solid $orange-accent;
+          }
+        }
+      }
+    }
     }
   }
 }

@@ -12,8 +12,9 @@ $list: amex, anfield, bramall, carrow, emirates;
 $nth: nth($list, $imgKey);
 
 .App {
-	height: 100vh;
-	overflow: hidden;
+	min-height: 100%;
+	backgound-attachment: fixed;
+	font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif;
 	background-image: 
 			linear-gradient(
     			to right,
@@ -30,10 +31,35 @@ $nth: nth($list, $imgKey);
 	text-align: center;
 	color: $secondary-color;
 
-	& .welcome {
-		height: 70vh;
+	& .welcome-container {
+		height: 100vh;
 		display: flex;
-		flex-direction: column;
 		justify-content: center;
+
+		& .welcome {
+			margin: 0px 20px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			& h1 {
+				padding: 20px 0px;
+			}
+
+			& a {
+				color: $secondary-color;
+
+				&:Hover {
+					color: $orange-accent;
+				}
+			}
+
+			& p {
+				padding: 5px;
+			}
+		}
 	}
 }
+
+@import "./dashboard/picks.scss";
+@import "./dashboard/standings.scss";

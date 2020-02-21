@@ -31,7 +31,7 @@ app.use('/picks', picksRouter);
 app.use('/auth', authRouter);
 app.use('/teams', teamsRouter);
 app.use('/forgotpassword', forgotRouter);
-app.use('/resetpassword', resetRouter);
+app.use('/reset', resetRouter);
 app.use('/updatepassword', updatepasswordRouter)
 
 app.listen(port, () => {

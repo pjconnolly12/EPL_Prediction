@@ -1,30 +1,38 @@
 const router = require('express').Router();
 let User = require('../models/user_model');
 const bcrypt = require('bcryptjs');
+let objectID = require('mongodb').ObjectID;
 
-const BCRYPT_SALT_ROUNDS = 12;
-
-router.route('/updatePasswordViaEmail').put((req,res, next) => {
-	User.findOne({
-		where: {
-			email: req.body.email,
-		},
-	}).then(user => {
+router.route('/updatePasswordViaEmail/:email?').post((req,res, next) => {
+	const email = req.query.email
+	User.findOne({ email })
+	.then(user => {
 		if(user != null) {
-			console.log('user exists in db');
-			bcrypt
-				.hash(req.body.password, BCRYPT_SALT_ROUNDS)
-				.then(hashedPassword => {
-					user.update({
-						password: hashedPassword,
-						resetPasswordToken: null,
-						resetPasswordExpires: null,
-					});
+			const saltRounds = 10
+			bcrypt.genSalt(saltRounds, function(err, salt) {
+				if (err) {
+					throw err
+				} else {
+					bcrypt.hash(req.body.password, salt, function(err, hash) {
+						if (err) {
+							throw err
+						} else {
+					console.log(hash)
+					const id = user._id
+					console.log(id)
+					const item = {
+						password: hash,
+						// resetPasswordToken: null,
+						// resetPasswordExpires: null,						
+					}
+					User.updateOne({ "_id": objectID(id)}, {$set: item })
+						.then(updates => res.json(updates))
+						.catch(err => res.status(400).json('Error: ' + err)) 
+					}
 				})
-				.then(() => {
-					console.log('password updated');
-					res.status(200).send({ message: 'password updated' });
-				});
+			}})
+			console.log('password updated');
+			res.status(200).send({ message: 'password updated' });		
 		} else {
 			console.log('no user exists in db to update');
 			res.status(404).json('no user exists in db to update');

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button, FormGroup, Form, Label, Input } from "reactstrap";
 import { AuthContext } from '../App';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Home from './home';
 import axios from 'axios'
 
@@ -21,19 +21,19 @@ const ResetPassword = (props) => {
   }, [])
 
   const reset = async () => {
-    await axios.get('http://localhost:3000/reset', {
+    await axios.get('http://localhost:3000/reset/reset/', {
       params: {
         resetPasswordToken: props.match.params.token,
       },
     })
     .then(response => {
       console.log(response);
-      if (response.data.message === 'password reset link  a-ok') {
+      if (response.data.message === 'password reset link a-ok') {
         updateData({
           ...data,
           email: response.data.email,
           error: false,
-          update: false,
+          updated: false,
         });
       } else {
         updateData({
@@ -44,25 +44,31 @@ const ResetPassword = (props) => {
       }
     })
     .catch(error => {
-      console.log(error.data)
+      console.log(error.response)
     })
   }
 
   const handleChange = (e) => {
     updateData({
+      ...data,
       [e.target.name]: e.target.value
     })
   }
 
   const updatePassword = (e) => {
     e.preventDefault();
-    axios.put('http://localhost:3000/updatePasswordViaEmail', {
-      username: data.email,
-      password: data.pasword,
+    const password = data.password;
+    // const userEmail = data.email
+    // const url = `'http://localhost:3000/updatepassword/updatePasswordViaEmail/${userEmail}'`
+    axios.post('http://localhost:3000/updatepassword/updatePasswordViaEmail/', {password}, {
+      params: {
+        email: data.email
+      },
     })
     .then(response => {
       console.log(response.data);
       if (response.data.message === 'password updated'){
+        console.log("made it here")
         updateData({
           ...data,
           updated: true,
@@ -76,7 +82,7 @@ const ResetPassword = (props) => {
       }
     })
     .catch(error => {
-      console.log(error.data);
+      console.log(error.response);
     })
   }
 
@@ -89,6 +95,8 @@ const ResetPassword = (props) => {
         </Link>
       </div>
     )
+  } else if (data.updated) {
+    return (<Redirect to='./' />)
   } else {
     return (
       <div>

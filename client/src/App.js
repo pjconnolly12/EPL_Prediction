@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import { Route, BrowserRouter as Router} from "react-router-dom";
 import "./sass/main.scss";
 import Dashboard from './components/dashboard';
 import Home from './components/home';
+import ResetPassword from './components/resetpassword'
 
 export const AuthContext = React.createContext();
 
@@ -11,7 +13,7 @@ export const AuthContext = React.createContext();
 // })
 
 const initialState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   user: null,
   token: null,
   teamName: null,
@@ -140,9 +142,12 @@ function App() {
   return (
   	<AuthContext.Provider
   		value={{ state, dispatch }}>
-	    <div className="App">
-	      {!state.isAuthenticated ? <Home /> : <Dashboard />}
-	    </div>
+  		<Router>
+  			<Route path="/reset/:token" component={ResetPassword} />
+		    <div className="App">
+		      {!state.isAuthenticated ? <Home /> : <Dashboard />}
+		    </div>
+	    </Router>
 	</AuthContext.Provider>
   );
 }

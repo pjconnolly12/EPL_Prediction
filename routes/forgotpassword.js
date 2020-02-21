@@ -2,23 +2,28 @@ const router = require('express').Router();
 const crypto = require('crypto');
 let User = require('../models/user_model');
 require('dotenv').config();
+let objectID = require('mongodb').ObjectID;
 
 const nodemailer = require('nodemailer');
 
 router.route('/forgot').post((req,res) => {
 	const email = req.body.email
-	if (email === '') {
-		return res.status(400).json({msg: "email required"})
-	}
+	if (email === '') return res.staus(400).json('email required');
 	User.findOne({ email })
-		.then(user => {
-			if(!user) return res.status(400).json({ msg: "Email does not exist"});
+	.then((user) => {
+		console.log(user._id)
+		if (user === null){
+			res.status(400).json({ msg: "email not in db"});
+		} else {
 			const token = crypto.randomBytes(20).toString('hex');
-			user.update({
+			const item = {
 				resetPasswordToken: token,
-				resetPasswordExpires: Date.now() + 360000,
-			}) 			
-
+				resetPasswordExpires: Date.now() + 3600000,
+			}
+			const id = user._id
+			User.updateOne({ "_id": objectID(id)},{ $set: item})
+				.then(updates => res.json(updates))
+				.catch(err => res.status(400).json('Error: ' + err)) 				
 
 		const transporter = nodemailer.createTransport({
 			service: 'gmail',
@@ -48,6 +53,7 @@ router.route('/forgot').post((req,res) => {
 				res.status(200).json('recovery email sent')
 			}
 		})
+	}
 	})
 })
 

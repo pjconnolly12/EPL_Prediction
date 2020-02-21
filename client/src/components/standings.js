@@ -51,7 +51,7 @@ const Standings = () => {
 	})
 
 		return (
-			<div>
+			<div className="standings">
 				<h1>Standings</h1>
 				<table>
 					<tbody>

@@ -18,11 +18,10 @@ const Home = () => {
 		logOrSign ? setLogorSign(false) : setLogorSign(true);
 	};
 
-  if (resetStatus.state.reset) {
-    return (
-      <ResetPassword />
-    )
-  } else {  
+    if (forgot) {
+      return (
+      <ForgotPassword forgot={forgot} updateForgot={updateForgot}/>
+    )} else {
   	return (
         <div className="comp-Container">
           <h1>Welcome to EPL Predictions</h1>

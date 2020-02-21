@@ -17,6 +17,8 @@ router.route('/add').post((req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
 	const teamName = req.body.teamName;
+	const resetPasswordToken = "";
+	const resetPasswordExpires = "";
 
 	if (!email || !password || !teamName){
 		return res.status(400).json({msg: 'Please complete all fields'})
@@ -32,6 +34,8 @@ router.route('/add').post((req, res) => {
 			email,
 			password,
 			teamName,
+			resetPasswordToken,
+			resetPasswordExpires,
 		});
 
 		bcrypt.genSalt(10, (err, salt) => {

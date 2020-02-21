@@ -8,9 +8,30 @@ import Standings from './standings';
 import { AuthContext } from '../App';
 import axios from 'axios';
 
+export const DashContext = React.createContext();
+
+const reducer = (state, action) => {
+	if (action.type === "ACTIVE") {
+		console.log(action.payload)
+		return {
+			...state,
+			isActive: action.payload
+		}
+	} else {
+		return state;
+	}	
+}
+
+
 function Dashboard() {
 
+	const initialState = {
+		isActive: "home"
+	}
+
 	const userInfo = useContext(AuthContext)
+
+	const [state, dispatchDash ] = React.useReducer(reducer, initialState);
 
 	useEffect(() => {
 		compare()
@@ -116,17 +137,18 @@ function Dashboard() {
     console.log(userPicks)
   };
 
-
 	return (
-		<Router>
-			<div className="container">
-				<Navigation />
-				<Route exact path="/" component={Welcome} />
-				<Route path="/picks" exact component={Picks} />
-				<Route path="/history" exact component={History} />
-				<Route path="/standings" exact component={Standings} />
-			</div>
-		</Router>
+		<DashContext.Provider value={{ state, dispatchDash }}>
+			<Router>
+				<div className="container">
+					<Navigation />
+					<Route exact path="/" component={Welcome} />
+					<Route path="/picks" exact component={Picks} />
+					<Route path="/history" exact component={History} />
+					<Route path="/standings" exact component={Standings} />
+				</div>
+			</Router>
+		</DashContext.Provider>
 	)
 }
 

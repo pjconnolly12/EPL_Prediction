@@ -1,11 +1,22 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../App'
+import { AuthContext } from '../App';
+import { DashContext } from './dashboard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import SmallNav from './verticalNav';
+import Welcome from './welcome';
 
 const Navigation = () => {
-  const [isActive, setActive] = useState("home");
+  const navInfo = useContext(DashContext);
+  const [isActive, setActive] = useState(navInfo.state.isActive)
   const userInfo = useContext(AuthContext);
   const { dispatch } = useContext(AuthContext);
+  const [hamburger, hamburgerToggle] = useState(true)
+
+  useEffect(() => {
+    setActive(navInfo.state.isActive)
+  }, [navInfo])
 
   const makeActive = e => {
     setActive(e.target.name);
@@ -18,8 +29,22 @@ const Navigation = () => {
     })
   }
 
+  const toggleMenu = () => {
+    hamburger ? hamburgerToggle(false) : hamburgerToggle(true)
+  }
+
   return (
     <div className="nav">
+    <div className="menu-btn">
+          {hamburger ? 
+          <div className="btn">
+            <FontAwesomeIcon onClick={toggleMenu} icon={faBars} />
+          </div> : 
+          <div className="btn">
+            <FontAwesomeIcon onClick={toggleMenu} icon={faTimes} />
+          </div>}
+    </div>
+    {hamburger ? <div></div> : <SmallNav hamburger={hamburger} hamburgerToggle={hamburgerToggle} />}
     <ul className="nav-list-left">
       <li>
         <Link

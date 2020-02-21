@@ -70,3 +70,7 @@ Button {
 .errorMsg {
 	@include error-message
 }
+
+@include phone {
+  
+}
