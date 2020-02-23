@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Route, BrowserRouter as Router} from "react-router-dom";
 import Navigation from './navigation';
 import Welcome from './welcome';
@@ -23,13 +23,14 @@ const reducer = (state, action) => {
 }
 
 
-function Dashboard() {
+function Dashboard(props) {
 
 	const initialState = {
 		isActive: "home"
 	}
 
 	const userInfo = useContext(AuthContext)
+	const fixtures = props.games
 
 	const [state, dispatchDash ] = React.useReducer(reducer, initialState);
 
@@ -43,7 +44,7 @@ function Dashboard() {
 			}
 		})
 		let userPicks = res.data
-    	userInfo.state.matches.map((match, index) => {
+    	fixtures.map((match, index) => {
       	if (match.statusShort === "FT") {
         	var realResult;
         	let userIndex =  userPicks.map(item => {return item.gameID}).indexOf(match.fixture_id);
@@ -94,8 +95,8 @@ function Dashboard() {
 	       }
       	} else {
         	let userIndex =  userPicks.map(item => {return item.gameID}).indexOf(match.fixture_id);
+
         	if (userIndex < 0) {
-        		console.log(userPicks)
 	        	const home = match.homeTeam.team_name
 	        	const homeScore = null
 	        	const away = match.awayTeam.team_name
@@ -119,8 +120,8 @@ function Dashboard() {
         			})
         		} else {
           		if (match.event_date.slice(0,10) !== userPicks[userIndex].date.slice(0,10)) {
-          			console.log(match.event_date)
-          			console.log(userPicks[userIndex].date)
+          			console.log(match.event_date.slice(0,10))
+          			console.log(userPicks[userIndex].date.slice(0,10))
 			        const id = match._id
 			        const date = match.event_date
 			        axios.post('picks/update/date', {id, date})
@@ -134,7 +135,6 @@ function Dashboard() {
         	}
       	}
     });
-    console.log(userPicks)
   };
 
 	return (

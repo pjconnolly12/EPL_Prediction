@@ -1,18 +1,13 @@
-import React, {useEffect, useState, useContext} from 'react';
-import { Route, BrowserRouter as Router} from "react-router-dom";
+import React, {useState} from 'react';
 import Login from "./login";
 import Signup from "./signup";
 import ForgotPassword from "./forgotpassword"
-import ResetPassword from "./resetpassword"
-import { AuthContext } from "../App"
 
 const Home = () => {
 
 	const [logOrSign, setLogorSign] = useState(true);
   const [signedUp, justSignedUp] = useState(false);
   const [forgot, updateForgot] = useState(false);
-
-  const resetStatus = useContext(AuthContext)
 
 	const handleButton = () => {
 		logOrSign ? setLogorSign(false) : setLogorSign(true);

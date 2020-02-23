@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from 'axios'
 import { AuthContext } from '../App'
@@ -6,7 +6,7 @@ import { AuthContext } from '../App'
 
 function Picks(props) {
 
-  useLayoutEffect(() =>  {
+  useEffect(() =>  {
     result()
   }, [])
 
@@ -23,6 +23,7 @@ function Picks(props) {
   const userInfo = useContext(AuthContext);
 
   const [results, updateResults] = useState([])
+  const [submitted, isSubmitted] = useState(false)
 
 
   const handleHomeChange = event => {
@@ -87,6 +88,7 @@ function Picks(props) {
             console.log(error.response)
           })
       })
+      isSubmitted(true)
     }
   };
 
@@ -126,6 +128,7 @@ function Picks(props) {
     <Form className="picksForm" onSubmit={handleSubmit}>
     {gameList}
       <Button className="pickSubmit" type="submit">Submit</Button>
+      <div className={submitted ? "success" : "msgHide"}>Picks Submitted!</div>
     </Form>
   );
 };

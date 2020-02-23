@@ -48,7 +48,7 @@ const History = () => {
       let year = match.date.slice(0, 4);
       const newDate = month + "/" + day + "/" + year;
 		return (
-			<tr key={match._id}>
+			<tr className="row" key={match._id}>
 				<td>{newDate}</td>
 				<td>{match.home} vs {match.away}</td>
 				<td>{match.homeScore} : {match.awayScore}</td>
@@ -66,7 +66,7 @@ const History = () => {
 
 
 		return (
-			<div>
+			<div className="history">
 				<h1>History</h1>
 				<div className="teamSelect">
 					<select onChange={handleTeamChange}>
@@ -75,7 +75,7 @@ const History = () => {
 					</select>
 				</div>
 				<table>
-					<tbody>
+					<thead>
 					<tr>
 						<th>Date</th>
 						<th>Fixture</th>
@@ -83,6 +83,8 @@ const History = () => {
 						<th>Score</th>
 						<th>Points</th>
 					</tr>
+					</thead>
+					<tbody>
 					{mapGames}
 					</tbody>
 				</table>

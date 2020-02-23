@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Button, FormGroup, Form, Label, Input } from "reactstrap";
+import { Button, Form, Input } from "reactstrap";
 import { AuthContext } from '../App';
-import { Link, Redirect } from 'react-router-dom';
-import Home from './home';
+import { Link } from 'react-router-dom';
+import history from '../history';
 import axios from 'axios'
 
 const ResetPassword = (props) => {
+
+  const { dispatch } = useContext(AuthContext);
 
   const initialState = {
     email: "",
@@ -58,8 +60,6 @@ const ResetPassword = (props) => {
   const updatePassword = (e) => {
     e.preventDefault();
     const password = data.password;
-    // const userEmail = data.email
-    // const url = `'http://localhost:3000/updatepassword/updatePasswordViaEmail/${userEmail}'`
     axios.post('http://localhost:3000/updatepassword/updatePasswordViaEmail/', {password}, {
       params: {
         email: data.email
@@ -68,12 +68,15 @@ const ResetPassword = (props) => {
     .then(response => {
       console.log(response.data);
       if (response.data.message === 'password updated'){
-        console.log("made it here")
         updateData({
           ...data,
           updated: true,
           error: false,
         });
+        dispatch({
+            type: "RESET",
+        })
+        history.replace('http://localhost:3000/')
       } else {
         updateData({
           updated: false,
@@ -88,18 +91,18 @@ const ResetPassword = (props) => {
 
   if (data.error) {
     return (
-      <div>
+      <div className="reset-container">
         <h4>Problem resetting password. Please send another reset link.</h4>
         <Link to='./' name="home">
           Go Home
         </Link>
       </div>
     )
-  } else if (data.updated) {
-    return (<Redirect to='./' />)
   } else {
     return (
-      <div>
+      <div className="reset-container">
+        <div className="reset-form">
+        <span> Please enter new password </span>
         <Form onSubmit={updatePassword}>
           <Input 
             type='password' 
@@ -111,6 +114,7 @@ const ResetPassword = (props) => {
             Submit
           </Button>
         </Form>
+        </div>
       </div>
     )
   }

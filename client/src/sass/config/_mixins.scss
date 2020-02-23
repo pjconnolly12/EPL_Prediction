@@ -1,5 +1,7 @@
+@import "./config/variables";
+
 @mixin error-message {
-	color: #92140C;
+	color: $orange-accent;
 	font-size: .8rem;
 	text-align: center;
 }

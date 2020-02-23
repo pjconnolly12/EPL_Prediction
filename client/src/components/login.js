@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Button, FormGroup, Form, Label, Input } from "reactstrap";
+import { Button, FormGroup, Form, Input } from "reactstrap";
 import { AuthContext } from '../App'
 import axios from 'axios'
-import Home from './home'
 
 const Login = (props) => {
   const { dispatch } = useContext(AuthContext);
+  const resetStatus = useContext(AuthContext)
   const initialState = {
     email: "",
     password: "",
@@ -21,6 +21,11 @@ const Login = (props) => {
       [event.target.name]: event.target.value
     });
   };
+
+  function validateForm() {
+    return data.email.length > 0 && data.password.length > 0;
+  }
+
   const handleFormSubmit = event => {
     event.preventDefault();
     setData({
@@ -51,6 +56,16 @@ const Login = (props) => {
     props.updateForgot(true)
   }
 
+  let resetMessage;
+  if (resetStatus.state.reset) {
+    resetMessage = <span>You have succesfully reset your password, please login using your new password</span>
+  } else {
+    resetMessage = <div className="forgot">
+        <span>Forget your password?</span>
+        <button onClick={handleForgot}>Click Here!</button>
+      </div>
+  } 
+
   return (
     <div className="modal-Container">
       <Form onSubmit={handleFormSubmit}>
@@ -61,7 +76,7 @@ const Login = (props) => {
         <FormGroup>
           <Input className="loginInput" value={data.password} onChange={handleInputChange} placeholder="Password" type="password" name="password" />
         </FormGroup>
-        <Button disabled={data.isSubmitting} className="submit">{data.isSubmitting ? (
+        <Button disabled={data.isSubmitting || !validateForm()} className="submit">{data.isSubmitting ? (
                 "Loading..."
               ) : (
                 "Login"
@@ -70,10 +85,7 @@ const Login = (props) => {
       <div className="errorMsg">
         <p>{data.errorMessage}</p>
       </div>
-      <div className="forgot">
-        <span>Forget your password?</span>
-        <button onClick={handleForgot}>Click Here!</button>
-      </div>
+        {resetMessage}
     </div>
   );
 };

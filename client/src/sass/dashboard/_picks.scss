@@ -21,8 +21,8 @@
 	}
 
 	& #games:hover {
-		border: 1px solid #395c6b;
-		box-shadow: 10px 10px 5px #395c6b;
+		// border: 1px solid $orange-accent;
+		box-shadow: 5px 5px 2px $orange-accent;
 		padding: 5px 5px 10px 5px;
 	}
 
@@ -58,4 +58,16 @@
 	  padding: 5px 0px;
 	  width: 100%;
 	}
+
+	& .msgHide {
+		display: none;
+	}
+
+	& .success {
+		margin-top: 10px;
+	}
+}
+
+@include phone {
+
 }

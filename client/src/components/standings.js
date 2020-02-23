@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect} from 'react'
 import axios from 'axios';
-import { AuthContext } from '../App'
 
 const Standings = () => {
-
-	const userInfo = useContext(AuthContext);
 
 	useEffect(() => {
 		createTable()
@@ -43,7 +40,7 @@ const Standings = () => {
 
 	const mapTable = table.map((el, index) => {
 		return (
-			<tr key={index}>
+			<tr className="standings-row" key={index}>
 				<td>{el.team}</td>
 				<td>{el.points}</td>
 			</tr>
@@ -54,11 +51,13 @@ const Standings = () => {
 			<div className="standings">
 				<h1>Standings</h1>
 				<table>
-					<tbody>
-					<tr>
+					<thead>
+					<tr className="headers">
 						<th>Team Name</th>
 						<th>Points</th>
 					</tr>
+					</thead>
+					<tbody>
 					{mapTable}
 					</tbody>
 				</table>

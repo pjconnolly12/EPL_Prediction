@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
-import { Button, FormGroup, Form, Label, Input } from "reactstrap";
-import { AuthContext } from '../App';
-import Home from './home';
-import axios from 'axios'
+import React, { useState } from "react";
+import { Button, FormGroup, Form, Input } from "reactstrap";
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const ForgotPassword = (props) => {
 
@@ -32,6 +32,7 @@ const ForgotPassword = (props) => {
       const email = data.email;
       axios.post('forgotpassword/forgot', {email})
         .then((response) => {
+          console.log(response.data)
           if (response.data === 'email not in db') {
             updateData({
               ...data,
@@ -62,9 +63,10 @@ const ForgotPassword = (props) => {
   }
 
   return (
-    <div className={props.forgot ? "modal-Forgot" : "modalHide"}>
+    <div className="forgot-container">
       <Form onSubmit={handleFormSubmit}>
-        <Button className="closeForgot" onClick={handleClick}>Close</Button>
+        <FontAwesomeIcon className="closeForgot" onClick={handleClick} icon={faTimes} />
+        <span>Please enter your email address to recieve a reset link</span>
         <FormGroup>
           <Input value={data.email} onChange={handleChange} placeholder="Email" type="email" name="email" />
         </FormGroup>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Button, FormGroup, Form, Label, Input } from "reactstrap";
+import { Button, FormGroup, Form, Input } from "reactstrap";
 import axios from 'axios';
-import Home from './home';
 
 const Signup = (props) => {
   const [email, setEmail] = useState("");

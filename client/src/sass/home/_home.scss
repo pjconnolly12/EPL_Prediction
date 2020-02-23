@@ -4,13 +4,12 @@
 
 .comp-Container {
 	text-align: center;
-  	margin-bottom: 20px;
+  	margin: 40px 0px; 
   	color: $secondary-color;
   	display: flex;
   	flex-direction: column;
   	justify-content: center;
   	align-items: center;
-  	height: 90vh;
 
   	& span {
   		padding-right: 10px;
@@ -39,22 +38,20 @@
     margin: 30px 0px 20px 0px;
     width: 100%;
 	}
-
-	&:Hover {
-		border: 1pt solid $orange-accent;
-	}
 }
 
 Button {
   	cursor: pointer;
   	border-radius: 3px;
-  	border: none;
-  	padding: 10px;
-  	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+  	border-bottom: 2px solid $orange-accent;
+  	padding: 5px;
+    background-color: transparent;
+    font-weight: 800;
+    text-transform: uppercase;
   	
   	&:Hover {
-  		background-color: $dark-teal;
-  		color: $secondary-color;
+  		border: 2px solid $orange-accent;
   	}
 }
 
@@ -69,8 +66,4 @@ Button {
 
 .errorMsg {
 	@include error-message
-}
-
-@include phone {
-  
 }

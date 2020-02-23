@@ -10,7 +10,7 @@ router.get('/getPicks/:teamName?', (req,res) => {
 });
 
 router.get('/getUserPicks/:teamName?/:status?', (req,res) => {
-	Picks.find({teamName: req.query.teamName, status: req.query.status})
+	Picks.find({teamName: req.query.teamName, status: req.query.status}).sort({'date': +1}).limit(10)
 		.then(picks => res.json(picks))
 		.catch(err => res.status(400).json('Error: ' + err));
 });

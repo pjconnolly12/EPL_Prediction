@@ -1,0 +1,54 @@
+@import "./config/variables";
+@import "./config/media";
+@import "./config/mixins";
+
+.forgot-container {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	& Form {
+		position: relative;
+		padding: 20px;
+		padding-top: 60px;
+  		border: solid 1px black;
+  		border-radius: 5px;
+  		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  		margin: 20px 0px;
+  		text-align: center;
+
+  		& .closeForgot {
+  			position: absolute;
+  			top: 0;
+  			right: 0;
+  			margin-top: 2px;
+  			margin-right: 5px;
+  			cursor: pointer;
+  			font-size: 1.3rem;
+
+  			&:Hover {
+  				color: $orange-accent;
+  			}
+  		};
+
+  		& Input {
+  			margin-top: 20px;
+  			height: 30px;
+  			width: 200px;
+  		}
+
+  		& span {
+  			color: $secondary-color;
+  		}
+
+  		& .submit {
+  			width: 200px;
+  		}
+	}
+
+	& .errorMsg {
+		font-size: 1.6rem;
+	}
+}

@@ -5,7 +5,6 @@ import { DashContext } from './dashboard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import SmallNav from './verticalNav';
-import Welcome from './welcome';
 
 const Navigation = () => {
   const navInfo = useContext(DashContext);
@@ -89,7 +88,11 @@ const Navigation = () => {
       </ul>
       <ul className="nav-list-right">
       <li className="right">
-        <a href="#">Welcome, {userInfo.state.teamName}</a>
+        <Link
+          to='./'
+          onClick={makeActive}
+          name="home"
+        >Welcome, {userInfo.state.teamName}</Link>
       </li>
       <li className="logout">
         <button onClick={handleLogout}>Logout</button>

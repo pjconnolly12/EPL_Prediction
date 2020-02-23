@@ -47,7 +47,8 @@
     }
 
     & button {
-      padding: 6px;
+      padding: 2px;
+      margin-left: 10px;
     }
   }
 
@@ -60,7 +61,7 @@
   }
 }
 
-@include phone {
+@include tablet {
   .nav {
     justify-content: flex-end;
 

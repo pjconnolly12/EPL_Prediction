@@ -2,7 +2,7 @@
 @import "./config/media";
 @import "./config/mixins";
 
-.standings {
+.history {
 	margin-top: 20px;
 	display: flex;
 	flex-direction: column;
@@ -10,8 +10,7 @@
 
 	& table {
 		margin-top: 20px;
-		border-spacing: collapse;
-		width: 350px;
+		border-spacing: 10px;
 		padding: 5px;
 
 		& thead th {
@@ -19,6 +18,33 @@
 			text-decoration-style: double; 
 			text-decoration: underline;
 			text-decoration-color: $orange-accent;
+		}
+
+		& tbody tr:Hover {
+			color: $orange-accent;
+		}
+	}
+
+	.teamSelect {
+		width: 45%;
+		text-align: left;
+		margin-top: 10px;
+
+		& select {
+			width: 150px;
+		}
+	}
+}
+
+@include phone {
+	.history {
+		font-size: .7rem;
+		overflow-x: hidden;
+
+		.teamSelect {
+			margin-top: 10px;
+			margin-left: 5px;
+			width: 100%;
 		}
 	}
 }

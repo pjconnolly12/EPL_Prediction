@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Navigation from './navigation'
 
 const SmallNav = (props) => {
-  const [hamburger, hamburgerToggle] = useState(true)
-
 
   const toggleMenu = () => {
     props.hamburger ? props.hamburgerToggle(false) : props.hamburgerToggle(true)

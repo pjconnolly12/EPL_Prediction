@@ -12,7 +12,8 @@ $list: amex, anfield, bramall, carrow, emirates;
 $nth: nth($list, $imgKey);
 
 .App {
-	min-height: 100%;
+	overflow-y: scroll;
+	height: 100vh;
 	backgound-attachment: fixed;
 	font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif;
 	background-image: 
@@ -25,6 +26,8 @@ $nth: nth($list, $imgKey);
 }
 
 @import "./home/home.scss";
+@import "./home/forgot.scss";
+@import "./home/reset.scss";
 @import "./dashboard/nav.scss";
 
 .container {
@@ -32,7 +35,7 @@ $nth: nth($list, $imgKey);
 	color: $secondary-color;
 
 	& .welcome-container {
-		height: 100vh;
+		height: 60vh;
 		display: flex;
 		justify-content: center;
 
@@ -63,3 +66,5 @@ $nth: nth($list, $imgKey);
 
 @import "./dashboard/picks.scss";
 @import "./dashboard/standings.scss";
+@import "./dashboard/history.scss";
+
