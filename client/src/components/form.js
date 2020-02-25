@@ -101,21 +101,23 @@ function Picks(props) {
       <FormGroup id="games" key={game.gameID}>
         <Label className="date">{newDate}</Label>
         <Label className="home">
-          {game.home}
+          <img src={game.homeLogo} alt={game.home} height="25" width="25"/>
+          <span>{game.home}</span>
           <Input
             className="pickInput"
             onChange={handleHomeChange}
-            value={game.homeScore}
+            value={game.homeScore || ""}
             name={game.gameID}
             type="text"
           />
         </Label>
         <Label className="home">
-          {game.away}
+          <img src={game.awayLogo} alt={game.away} height="25" width="25"/>
+          <span>{game.away}</span>
           <Input
             className="pickInput"
             onChange={handleAwayChange}
-            value={game.awayScore}
+            value={game.awayScore || ""}
             name={game.gameID}
             type="text"
           />

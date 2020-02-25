@@ -43,6 +43,10 @@
 	  justify-content: space-between;
 	  grid-column-start: 1;
 	  grid-column-end: 3;
+
+	  & span {
+	  	padding-top: 4px;
+	  }
 	}
 	& .away {
 	  margin-left: 20px;
@@ -52,6 +56,10 @@
 	  justify-content: space-between;
 	  grid-column-start: 1;
 	  grid-column-end: 3;
+
+	  & span {
+	  	padding-top: 4px;
+	  }
 	}
 	& .pickSubmit {
 	  margin-top: 20px;
@@ -66,6 +74,7 @@
 	& .success {
 		margin-top: 10px;
 	}
+
 }
 
 @include phone {

@@ -68,6 +68,16 @@ router.post('/update/date', (req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err))
 })
 
+router.post('/update/status', (req, res) => {
+	const item = {
+		status: req.body.status
+	}
+	let id = req.body.id
+	Picks.updateOne({"_id": objectID(id)}, {$set: item })
+		.then(picks => res.json(picks))
+		.catch(err => res.status(400).json('Error: ' + err))
+})
+
 router.post('/add/', (req, res) => {
 	const { home, homeScore, away, awayScore, gameID, result, points, teamName, date, status, realHomeScore, realAwayScore, homeLogo, awayLogo} = req.body;
 	const newPicks = new Picks({

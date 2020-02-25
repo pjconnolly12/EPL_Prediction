@@ -44,6 +44,7 @@ function Dashboard(props) {
 			}
 		})
 		let userPicks = res.data
+		console.log(userPicks)
     	fixtures.map((match, index) => {
       	if (match.statusShort === "FT") {
         	var realResult;
@@ -93,9 +94,20 @@ function Dashboard(props) {
 		        	})
 	            }
 	       }
+	       // if game is currently happening remove it from picks
+      	} else if (match.statusShort === '1H' || match.statusShort === '2H') {
+      		let userIndex =  userPicks.map(item => {return item.gameID}).indexOf(match.fixture_id);
+  			const id = userPicks[userIndex]._id
+		    const status = match.statusShort
+		    axios.post('picks/update/status', {id, status})
+	          .then((result) => {
+	          })
+	          .catch((error) => {
+	            console.log(error.response)
+	          })
       	} else {
+      		// check that NS game exists in user picks, if not, add the game to the teams picks
         	let userIndex =  userPicks.map(item => {return item.gameID}).indexOf(match.fixture_id);
-
         	if (userIndex < 0) {
 	        	const home = match.homeTeam.team_name
 	        	const homeScore = null
@@ -119,14 +131,14 @@ function Dashboard(props) {
             			console.log(error.response);
         			})
         		} else {
+        			// check that dates match, if not update to the API date
           		if (match.event_date.slice(0,10) !== userPicks[userIndex].date.slice(0,10)) {
-          			console.log(match.event_date.slice(0,10))
-          			console.log(userPicks[userIndex].date.slice(0,10))
-			        const id = match._id
+          			console.log(match.event_date.slice(0,10), match.fixture_id)
+          			console.log(userPicks[userIndex].date.slice(0,10), userPicks[userIndex].gameID)
+			        const id = userPicks[userIndex]._id
 			        const date = match.event_date
 			        axios.post('picks/update/date', {id, date})
 			          .then((result) => {
-			            console.log(result.data)
 			          })
 			          .catch((error) => {
 			            console.log(error.response)
