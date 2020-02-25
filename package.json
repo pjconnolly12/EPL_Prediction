@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently  \"node index.js\" \"cd client && npm start\"",
+    "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^5.0.0",
+    "concurrently": "^5.1.0",
     "nodemon": "^1.19.1"
   },
   "dependencies": {
