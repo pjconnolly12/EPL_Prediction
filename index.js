@@ -13,12 +13,16 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '/client/build')));
 
 const uri = process.env.ATLAS_URI
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+mongoose.connect(uri)
+	.then(() => console.log('DB connected...'))
+	.catch(err => console.log(err));
 
-const connection = mongoose.connection;
-connection.once('open', () => {
-	console.log("MongoDB databse connection established");
-})
+ // {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useMongoClient:true }
+
+// const connection = mongoose.connection;
+// connection.once('open', () => {
+// 	console.log("MongoDB databse connection established");
+// })
 
 const userRouter = require('./routes/user');
 const picksRouter = require('./routes/picks');
