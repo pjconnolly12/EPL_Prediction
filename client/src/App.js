@@ -52,7 +52,7 @@ function App() {
 	    "headers":{
 	    "content-type":"application/octet-stream",
 	    "x-rapidapi-host":"api-football-v1.p.rapidapi.com",
-	    "x-rapidapi-key": process.env.REACT_APP_API_KEY
+	    "x-rapidapi-key": `${process.env.REACT_APP_API_KEY}`
 	    },
 	    })
 	    .then((response)=>{
