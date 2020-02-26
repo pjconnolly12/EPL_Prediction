@@ -45,7 +45,7 @@ function App() {
 
 	const [games, updateFixtures] = useState()
 
-	API_KEY = `${process.env.REACT_APP_API_KEY}`
+	const api_key = `${process.env.REACT_APP_API_KEY}`
 
 	useEffect(() => {
 	axios({
@@ -54,7 +54,7 @@ function App() {
 	    "headers":{
 	    "content-type":"application/octet-stream",
 	    "x-rapidapi-host":"api-football-v1.p.rapidapi.com",
-	    "x-rapidapi-key": API_KEY,
+	    "x-rapidapi-key": api_key
 	    },
 	    })
 	    .then((response)=>{
