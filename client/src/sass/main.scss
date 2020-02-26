@@ -8,7 +8,7 @@
 }
 
 $imgKey: random(5);
-$list: amex, anfield, bramall, carrow, emirates;
+$list: amex, anfield, bramall, carrow, emirates, etihad, goodison, kingPower, london, molineaux, oldtrafford, selhurst, spurs, stamford, stjames, stmarys, turfmoor, vicarage, villa, vitality;
 $nth: nth($list, $imgKey);
 
 .App {

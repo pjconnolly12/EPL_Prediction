@@ -37,7 +37,6 @@
     justify-content: flex-end;
     width: 40%;
     padding-right: 20px;
-    padding-top: 2px;
 
     & li a {
       font-weight: 900;
@@ -47,10 +46,16 @@
     }
 
     & button {
-      padding: 2px;
+      padding-top: 2px;
       margin-left: 10px;
-      color: $secondary-color;
-      text-transform: lowercase;
+      color: $orange-accent;
+      text-transform: uppercase;
+      border-bottom: none;
+      font-weight: 900;
+
+      &:Hover {
+        border: 1px solid $orange-accent;
+      }
     }
   }
 
@@ -70,6 +75,11 @@
     & .nav-list-right {
       width: 80%;
       font-size: .8rem;
+
+      & button {
+        font-size: .7rem;
+        padding-top: 0px;
+      }
     }
 
     & .menu-btn {

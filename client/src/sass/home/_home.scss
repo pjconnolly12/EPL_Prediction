@@ -49,6 +49,7 @@ Button {
     background-color: transparent;
     font-weight: 800;
     text-transform: uppercase;
+    color: $orange-accent;
   	
   	&:Hover {
   		border: 2px solid $orange-accent;
